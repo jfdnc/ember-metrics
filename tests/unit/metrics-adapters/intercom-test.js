@@ -19,9 +19,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#identify with `distinctId` calls `Intercom()` with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });
@@ -50,9 +51,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#identify with `email` calls `Intercom()` with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });
@@ -81,9 +83,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#identify without `distinctId` or `email` throws', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });
@@ -100,9 +103,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#identify calls `Intercom()` with `boot` on initial call, then `update` on subsequent calls', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });
@@ -133,9 +137,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#trackEvent calls `Intercom()` with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });
@@ -171,9 +176,10 @@ module('intercom adapter', function (hooks) {
   });
 
   test('#trackPage calls `Intercom()` with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:intercom')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:intercom'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'Intercom').callsFake(() => {
       return true;
     });

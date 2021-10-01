@@ -19,9 +19,10 @@ module('segment adapter', function (hooks) {
   });
 
   test('#identify calls analytics with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:segment')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:segment'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window.analytics, 'identify').callsFake(() => {
       return true;
     });
@@ -32,9 +33,10 @@ module('segment adapter', function (hooks) {
   });
 
   test('#trackEvent returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:segment')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:segment'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window.analytics, 'track');
     adapter.trackEvent({
       event: 'Signed Up',
@@ -57,9 +59,10 @@ module('segment adapter', function (hooks) {
   });
 
   test('#trackPage returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:segment')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:segment'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window.analytics, 'page');
     adapter.trackPage({
       page: '/my-overridden-page?id=1',
@@ -80,9 +83,10 @@ module('segment adapter', function (hooks) {
   });
 
   test('#alias returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:segment')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:segment'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window.analytics, 'alias');
     adapter.alias({ alias: 'foo', original: 'bar' });
 

@@ -4,11 +4,9 @@ import { capitalize } from '@ember/string';
 import { compact } from '../utils/object-transforms';
 import removeFromDOM from '../utils/remove-from-dom';
 import BaseAdapter from './base';
-import classic from 'ember-classic-decorator';
 
-@classic
 export default class GoogleAnalytics extends BaseAdapter {
-  gaSendKey = null;
+  gaSendKey = 'send';
 
   toStringExtension() {
     return 'GoogleAnalytics';
@@ -17,7 +15,10 @@ export default class GoogleAnalytics extends BaseAdapter {
   init() {
     const config = { ...this.config };
     const { id, sendHitTask, trace, require, debug, trackerName } = config;
-    this.gaSendKey = trackerName ? trackerName + '.send' : 'send';
+
+    if (trackerName) {
+      this.gaSendKey = `${trackerName}.send`;
+    }
 
     assert(
       `[ember-metrics] You must pass a valid \`id\` to the ${this.toString()} adapter`,

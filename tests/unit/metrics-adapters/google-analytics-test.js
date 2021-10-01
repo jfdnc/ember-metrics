@@ -25,9 +25,10 @@ module('google-analytics adapter', function (hooks) {
     config.trace = false;
     config.sampleRate = 5;
 
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'ga').callsFake(() => {
       return true;
     });
@@ -48,9 +49,10 @@ module('google-analytics adapter', function (hooks) {
     config.sampleRate = 5;
     config.trackerName = 'myEngineTracker';
 
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'ga').callsFake(() => {
       return true;
     });
@@ -75,9 +77,10 @@ module('google-analytics adapter', function (hooks) {
   });
 
   test('#init calls ga for any plugins specified', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'ga').callsFake(() => {
       return true;
     });
@@ -89,9 +92,10 @@ module('google-analytics adapter', function (hooks) {
   });
 
   test('#identify calls ga with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window, 'ga').callsFake(() => {
       return true;
     });
@@ -105,9 +109,10 @@ module('google-analytics adapter', function (hooks) {
   });
 
   test('#trackEvent returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     sandbox.stub(window, 'ga');
     const result = adapter.trackEvent({
       category: 'button',
@@ -133,9 +138,10 @@ module('google-analytics adapter', function (hooks) {
   });
 
   test('#trackPage returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     sandbox.stub(window, 'ga');
 
     const result = adapter.trackPage({
@@ -163,9 +169,10 @@ module('google-analytics adapter', function (hooks) {
   });
 
   test('#trackEvent with trackerName returns the correct response shape', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:google-analytics')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:google-analytics'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     sandbox.stub(window, 'ga');
     const result = adapter.trackEvent({
       category: 'button',

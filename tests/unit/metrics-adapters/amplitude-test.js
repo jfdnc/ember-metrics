@@ -22,9 +22,10 @@ module('amplitude adapter', function (hooks) {
       set: sinon.fake(),
       get: sinon.fake(),
     };
-    adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:amplitude')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:amplitude'
+    ).class;
+    adapter = new adapterClass(config, this.owner);
   });
 
   hooks.afterEach(function () {

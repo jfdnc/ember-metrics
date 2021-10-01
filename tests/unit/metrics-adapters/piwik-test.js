@@ -20,9 +20,10 @@ module('piwik adapter', function (hooks) {
   });
 
   test('#identify calls piwik with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:piwik')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:piwik'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window._paq, 'push').callsFake(() => {
       return true;
     });
@@ -36,9 +37,10 @@ module('piwik adapter', function (hooks) {
   });
 
   test('#trackEvent calls piwik with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:piwik')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:piwik'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window._paq, 'push').callsFake(() => {
       return true;
     });
@@ -56,9 +58,10 @@ module('piwik adapter', function (hooks) {
   });
 
   test('#trackPage calls piwik with the right arguments', function (assert) {
-    const adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:piwik')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:piwik'
+    ).class;
+    const adapter = new adapterClass(config, this.owner);
     const stub = sandbox.stub(window._paq, 'push').callsFake(() => {
       return true;
     });

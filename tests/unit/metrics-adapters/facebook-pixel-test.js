@@ -19,9 +19,10 @@ module('facebook-pixel adapter', function (hooks) {
       },
     };
 
-    subject = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:facebook-pixel')
-      .create({ config });
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:facebook-pixel'
+    ).class;
+    subject = new adapterClass(config, this.owner);
 
     return waitForScripts();
   });

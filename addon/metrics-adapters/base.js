@@ -1,20 +1,24 @@
-import emberObject from '@ember/object';
 import { assert } from '@ember/debug';
 import { guidFor } from '@ember/object/internals';
 import { typeOf } from '@ember/utils';
-import classic from 'ember-classic-decorator';
+import { registerDestructor } from '@ember/destroyable';
+import { setOwner } from '@ember/application';
 
 function makeToString(ret) {
   return () => ret;
 }
 
-@classic
-export default class BaseAdapter extends emberObject {
+export default class BaseAdapter {
   static supportsFastBoot = false;
 
   metrics = null;
 
-  config = null;
+  constructor(config = null, owner = null) {
+    this.config = config;
+    setOwner(this, owner);
+    this.init();
+    registerDestructor(this, () => this.willDestroy());
+  }
 
   init() {
     assert(`[ember-metrics] ${this.toString()} must implement the init hook!`);

@@ -10,9 +10,11 @@ module('azure-app-insights adapter', function (hooks) {
     this.config = {
       instrumentationKey: '12345',
     };
-    this.adapter = this.owner
-      .factoryFor('ember-metrics@metrics-adapter:azure-app-insights')
-      .create({ config: this.config });
+
+    const adapterClass = this.owner.factoryFor(
+      'ember-metrics@metrics-adapter:azure-app-insights'
+    ).class;
+    this.adapter = new adapterClass(this.config, this.owner);
   });
 
   hooks.afterEach(function () {
